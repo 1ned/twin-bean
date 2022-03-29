@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=window-width, user-scalable=no, initial-scale=1.0">
+  <title>twin bean n boxes</title>
+  <style>
+		* {
+			margin: 0;
+		}
+		html,
+		body {
+      position: absolute;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+    @media only screen and (orientation:portrait) {
+      body {
+        height: 100vw;
+        transform: rotate(90deg);
+      }
+    }
+		canvas {
+			display: block;
+		}
+    #content-desktop {display: none;}
+    .right {
+      position: fixed;
+      right: 0px;
+      color: white;
+    }
+    .left {
+      position: fixed;
+      left: 0px;
+      color: white;
+    }
+	</style>
+</head>
+<body>
+  <div id="content-desktop">
+    <div class="left" id="ws"><h3>use: W & S</h3></div>
+    <div class="right" id="updown"><h3>use: UP & DOWN</h3></div>
+  </div>
+  <script> //opened in a mobile device or a desktop
+    /* Storing user's device details in a variable*/
+    let details = navigator.userAgent;
+
+    /* Creating a regular expression 
+    containing some mobile devices keywords 
+    to search it in details string*/
+    let regexp = /android|iphone|kindle|ipad/i;
+
+    /* Using test() method to search regexp in details
+    it returns boolean value*/
+    let isMobileDevice = regexp.test(details);
+
+    if (isMobileDevice) {
+        // document.write("You are using a Mobile Device");
+    } else {
+      document.getElementById("content-desktop").style.display = "block";
+      // document.getElementById("ws").innerHTML += "<h3>use: W & S<h3>";
+      // document.getElementById("updown").innerHTML += "<h3>use: UP & DOWN<h3>";
+    }
+  </script>
+  <script type="text/javascript"> // RELOADS WEBPAGE WHEN MOBILE ORIENTATION CHANGES  
+    window.onorientationchange = function() {
+      window.location.reload();
+    };
+  </script>
+  <script src="https://unpkg.com/kaboom/dist/kaboom.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
